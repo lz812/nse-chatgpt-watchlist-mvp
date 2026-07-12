@@ -32,11 +32,10 @@ The displayed Opportunity Score is **not a success probability**.
 1. Create a new GitHub repository.
 2. Upload this project.
 3. Open **Settings → Pages**.
-4. Choose **Deploy from a branch**.
-5. Select the `main` branch and `/docs` folder.
-6. Open **Actions** and run **Build premarket watchlist** manually.
-7. Confirm that `docs/feed.json`, `docs/latest.md` and `docs/index.html`
-   were updated.
+4. Under **Build and deployment → Source**, select **GitHub Actions**.
+5. Open **Actions** and run **Build and deploy premarket watchlist** manually.
+6. Wait for the workflow and the `github-pages` deployment to finish.
+7. Open the Pages address shown by GitHub and confirm the watchlist loads.
 8. Copy the GitHub Pages address into the Custom GPT instructions.
 
 ## Schedule
@@ -83,3 +82,19 @@ python src/scan.py
 A broker or authorised data feed can later replace only the data adapters.
 The output contract can stay stable, so the Custom GPT does not need a full
 redesign.
+
+
+## Version 1.1 upgrade
+
+The scanner now:
+
+- Skips NSE equity weekends and published holidays
+- Publishes a market-closed page on closed sessions
+- Uses trading-session-aware freshness checks
+- Adds prior-day high, low, pivot, range and close-location data
+- Calculates an estimated previous-session volume profile for the leading pool
+- Adds delayed/free global overnight high-low context
+
+The repository carries `data/nse_equity_holidays.json` as a fallback and also
+attempts to refresh the current-year calendar from official NSE sources.
+Ad-hoc closures should still be verified against the latest exchange circular.

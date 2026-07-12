@@ -41,3 +41,21 @@ The Custom GPT may add these only after researching current sources:
 - `research_sources`
 
 It must not overwrite the feed's measured values.
+
+
+## Version 1.1 additions
+
+- `market_status`, `closure_reason`, and `next_trading_day`
+- `previous_high`, `previous_low`, `previous_range_pct`
+- `previous_close_location`
+- `classical_pivot`, `pivot_resistance_1`, `pivot_support_1`
+- `volume_profile.point_of_control`
+- `volume_profile.value_area_high`
+- `volume_profile.value_area_low`
+- `volume_profile.previous_session_vwap`
+- `volume_profile.profile_state_at_close`
+- `macro.overnight_proxies`
+
+The previous-session volume profile is estimated from free 15-minute bars.
+It is not tick-level exchange volume-at-price data. The overnight proxy fields
+refer to global futures and FX; NSE cash shares do not trade overnight.
